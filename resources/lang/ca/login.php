@@ -13,4 +13,5 @@ return [
     'username' => 'Usuari',
     'password' => 'Contrasenya',
     'remember' => 'Recorda\'m',
+    'login_btn' => 'Inicia sessió',
 ];

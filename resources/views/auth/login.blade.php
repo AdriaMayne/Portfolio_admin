@@ -15,7 +15,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/login/main.css') }}">
 
-
         {{-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> --}}
         {{-- <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"> --}}
 
@@ -31,11 +30,11 @@
                 <form class="w-100 validate-form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <span class="login-form-logo bg-white my-0 mx-auto rounded-circle d-flex align-items-center">
-                        <img src="{{ asset('img/logo.png') }}" alt="">
+                        <i class="fas fa-crown"></i>
                     </span>
                     <span class="login-form-title d-block text-center text-white text-uppercase my-4">{{ __('login.title') }}</span>
                     <div class="wrap-input">
-                        <input id="email" type="text" class="input text-white d-block w-100 bg-transparent" name="email" value="{{ old('email') }}" placeholder="{{ __('login.username') }}" autocomplete="email" autofocus required>
+                        <input id="username" type="text" class="input text-white d-block w-100 bg-transparent" name="identificador" value="{{ old('email') }}" placeholder="{{ __('login.username') }}" autocomplete="username" autofocus required>
                         <span class="focus-input d-block w-100 h-100 position-absolute"></span>
                     </div>
                     <div class="wrap-input">
@@ -49,9 +48,7 @@
                         </label>
                     </div>
                     <div class="container-login-form-btn w-100 d-flex flex-wrap justify-content-center">
-                        <button class="login-form-btn">
-                            Login
-                        </button>
+                        <button class="login-form-btn">{{ __('login.login_btn') }}</button>
                     </div>
                     {{-- <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
@@ -70,10 +67,10 @@
         </div>
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         {{-- <script src="vendor/select2/select2.min.js"></script> --}}
         <script src="{{ asset('libs/tilt/tilt.jquery.min.js') }}"></script>
-        <script >
+        <script>
             $('.js-tilt').tilt({
                 scale: 1.1
             })

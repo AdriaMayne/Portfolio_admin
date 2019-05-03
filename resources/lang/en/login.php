@@ -9,8 +9,9 @@ return [
     |
     */
 
-    'title' => 'Login',
+    'title' => 'Log In',
     'username' => 'User',
     'password' => 'Password',
     'remember' => 'Remember me',
+    'login_btn' => 'Login',
 ];

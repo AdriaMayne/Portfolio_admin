@@ -1,23 +1,22 @@
 /* FONTS */
-
 @font-face {
     font-family: Poppins-Regular;
-    src: url('/fonts/poppins/Poppins-Regular.ttf');
+    src: url('/Portfolio_admin/public/fonts/poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
     font-family: Poppins-Medium;
-    src: url('/fonts/poppins/Poppins-Medium.ttf');
+    src: url('/Portfolio_admin/public/fonts/poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
     font-family: Poppins-Bold;
-    src: url('/fonts/poppins/Poppins-Bold.ttf');
+    src: url('/Portfolio_admin/public/fonts/poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
     font-family: Poppins-SemiBold;
-    src: url('/fonts/poppins/Poppins-SemiBold.ttf');
+    src: url('/Portfolio_admin/public/fonts/poppins/Poppins-SemiBold.ttf');
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -56,8 +55,7 @@ a:hover {
     color: #fff;
 }
 
-/*---------------------------------------------*/
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
     margin: 0px;
 }
 
@@ -94,27 +92,16 @@ input:focus:-moz-placeholder { color:transparent; }
 input:focus::-moz-placeholder { color:transparent; }
 input:focus:-ms-input-placeholder { color:transparent; }
 
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
-
 input::-webkit-input-placeholder { color: #fff;}
 input:-moz-placeholder { color: #fff;}
 input::-moz-placeholder { color: #fff;}
 input:-ms-input-placeholder { color: #fff;}
-
-textarea::-webkit-input-placeholder { color: #fff;}
-textarea:-moz-placeholder { color: #fff;}
-textarea::-moz-placeholder { color: #fff;}
-textarea:-ms-input-placeholder { color: #fff;}
 
 label {
     margin: 0;
     display: block;
 }
 
-/*---------------------------------------------*/
 button {
     outline: none !important;
     border: none;
