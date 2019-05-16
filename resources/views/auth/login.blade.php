@@ -1,80 +1,71 @@
 <!DOCTYPE html>
-<html lang="{{ Config::get('app.locale') }}">
+<html lang="en">
     <head>
-        <title>Admin Login</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- FontAwesome -->
-        <script src="{{ asset('libs/FontAwesome/all.js') }}"></script>
+        <title>LOGIN - AdriaMayne</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/login/main.css') }}">
-
-        {{-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> --}}
-        {{-- <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"> --}}
-
-        {{-- <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-        <link rel="stylesheet" type="text/css" href="css/util.css">--}}
-    <!--===============================================================================================-->
-    </head>
-    <body class="w-100 my-0 mx-auto">
-        <div class="container-login w-100 d-flex flex-wrap justify-content-center position-relative align-items-center" style="background-image: url('{{ asset('img/login-background.jpg') }}');">
-            <div class="wrap-login overflow-hidden">
-                <form class="w-100 validate-form" method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <span class="login-form-logo bg-white my-0 mx-auto rounded-circle d-flex align-items-center">
-                        <i class="fas fa-crown"></i>
-                    </span>
-                    <span class="login-form-title d-block text-center text-white text-uppercase my-4">{{ __('login.title') }}</span>
-                    <div class="wrap-input">
-                        <input id="username" type="text" class="input text-white d-block w-100 bg-transparent" name="identificador" value="{{ old('email') }}" placeholder="{{ __('login.username') }}" autocomplete="username" autofocus required>
-                        <span class="focus-input d-block w-100 h-100 position-absolute"></span>
-                    </div>
-                    <div class="wrap-input">
-                        <input id="password" type="password" class="input text-white d-block w-100 bg-transparent" name="password" placeholder="{{ __('login.password') }}" required>
-                        <span class="focus-input d-block w-100 h-100 position-absolute"></span>
-                    </div>
-                    <div class="form-checkbox">
-                        <input class="input-checkbox d-none" id="remember-checkbox" type="checkbox" name="remember-me">
-                        <label class="label-checkbox" for="remember-checkbox">
-                            {{ __('login.remember') }}
-                        </label>
-                    </div>
-                    <div class="container-login-form-btn w-100 d-flex flex-wrap justify-content-center">
-                        <button class="login-form-btn">{{ __('login.login_btn') }}</button>
-                    </div>
-                    {{-- <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Login') }}
-                            </button>
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                        </div>
-                    </div> --}}
-                </form>
-            </div>
-        </div>
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('media/img/logo.png') }}">
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
-        {{-- <script src="vendor/select2/select2.min.js"></script> --}}
-        <script src="{{ asset('libs/tilt/tilt.jquery.min.js') }}"></script>
-        <script>
-            $('.js-tilt').tilt({
-                scale: 1.1
-            })
-        </script>
-        <script src="{{ asset('js/events/login.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-md-6 mx-auto">
+                    <div class="card bg-transparent border-light">
+                        <img class="mb-4 mx-auto" src="{{ asset('media/img/logo.png')}}" alt="AdriaMayne Logo">
+                        <h2 class="text-center mb-0">LOGIN</h2>
+                        <div class="card-body">
+                            <form method="POST" action="{{ action('Auth\LoginController@login') }}">
+                                @csrf
+                                <div class="form-group col-lg-11 mx-auto">
+                                    <label for="email" class="col-form-label">{{ __('Username') }}</label>
+                                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="identificador" value="{{ old('email') }}" placeholder="{{ __('Username or email') }}" autocomplete="email" autofocus required>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-lg-11 mx-auto">
+                                    <label for="password" class="col-form-label">{{ __('Password') }}</label>
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{ __('Password') }}" autocomplete="current-password" required>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group row mb-0">
+                                    <button type="submit" class="btn col-10 col-lg-8 mx-auto">
+                                        {{ __('Login') }}
+                                    </button>
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

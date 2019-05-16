@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background-color: #897d9e;
+}
+
+img {
+    height: 11.5rem;
+    width: 9rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c2c2c;
+}
+
+.btn {
+    background-color: #3c3c3c;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.btn:hover {
+    background-color: #2c2c2c;
+    color: #FFF;
+}
+
+.card {
+    border: 0px;
+}
+
+.col-form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    background-color: #3c3c3c!important;
+    color: #FFF!important;
+    border: 1px solid #2c2c2c;
+}
+
+.form-control:focus {
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55,.25);
+}
+
+.form-control:hover {
+    background-color: #2c2c2c!important;
+    color: #FFF!important;
+}

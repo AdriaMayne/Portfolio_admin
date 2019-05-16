@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\User;
 
 class LoginController extends Controller {
     /*
@@ -45,12 +45,12 @@ class LoginController extends Controller {
         $identificador = $request->input('identificador');
         $password = $request->input('password');
 
-        $user = Usuario::where('nombre_usuario', $identificador)
+        $usuario = User::where('username', $identificador)
                             ->orWhere('email', $identificador)
                             ->first();
 
-        if ($usuario != null && Hash::check($password, $user->password)) {
-            Auth::login($user);
+        if ($usuario != null && Hash::check($password, $usuario->password)) {
+            Auth::login($usuario);
             return redirect('/');
         } else {
             return redirect('/login')->withInput();
