@@ -11,12 +11,10 @@
 |
 */
 
-
-Route::get('/user-new', 'UserController@store');
 // LOGIN
-Route::get('/login', function () {
+Route::get('login', function () {
     return view('auth.login');
-});
+})->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::group(['middleware' => ['auth']], function () {
