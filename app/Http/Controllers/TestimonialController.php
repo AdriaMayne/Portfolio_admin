@@ -11,10 +11,21 @@ class TestimonialController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $testimonials = Testimonial::All();
-
+    public function index(Request $request) {
+        if($request->has('search')) {
+            $search = $request->input('search');
+            $testimonials = Testimonial::where('name', 'like', '%' . $search . '%')
+                                        ->orWhere('title', 'like', '%' . $search . '%')
+                                        ->orderBy('name')
+                                        ->paginate(10);
+        } else {
+            $testimonials = Testimonial::orderBy('order')
+                                        ->paginate(10);
+            $search = "";
+        }
         $datos['testimonials'] = $testimonials;
+        $datos['search'] = $search;
+
         return view('admin.testimonials.index', $datos);
     }
 
