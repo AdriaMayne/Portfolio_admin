@@ -15,7 +15,8 @@
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css" integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('fonts/FontAwesome/fontawesome.css') }}">
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,14 +24,16 @@
     </head>
     <body>
         <div id="mySidenav" class="sidenav">
-            <a href="{{ url('/') }}">Landing</a>
-            <a href="{{ url('/contacts') }}">Contacto</a>
-            <a href="{{ url('/languages') }}">Lenguajes</a>
-            <a href="{{ url('/projects') }}">Proyectos</a>
-            <a href="{{ url('/tags') }}">Tags</a>
-            <a href="{{ url('/testimonials') }}">Testimonials</a>
-            <hr class="logout-hr my-2 mx-auto">
-            <a href="{{ url('/logout') }}">Logout</a>
+            <a class="mb-5 text-center" href="{{ url('/') }}">
+                <img src="{{ asset('media/img/logo_white.png') }}" alt="AdriaMayne Logo">
+            </a>
+            <a href="{{ url('/') }}"><i class="fas fa-home"></i> Landing</a>
+            <a href="{{ url('/contacts') }}"><i class="fas fa-envelope"></i> Contacto</a>
+            <a href="{{ url('/languages') }}"><i class="fas fa-code"></i> Lenguajes</a>
+            <a href="{{ url('/projects') }}"><i class="fas fa-briefcase"></i> Proyectos</a>
+            <a href="{{ url('/tags') }}"><i class="fas fa-tag"></i> Tags</a>
+            <a href="{{ url('/testimonials') }}"><i class="fas fa-comments"></i> Testimonials</a>
+            <a class="signout" href="{{ url('/logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
         <div id="app">
             <main class="py-2">
