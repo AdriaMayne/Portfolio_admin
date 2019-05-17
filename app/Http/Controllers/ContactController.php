@@ -15,7 +15,7 @@ class ContactController extends Controller {
         $contacts = Contact::All();
 
         $datos['contacts'] = $contacts;
-        return view('auth.admin.contacts.index', $datos);
+        return view('admin.contacts.index', $datos);
     }
 
     /**

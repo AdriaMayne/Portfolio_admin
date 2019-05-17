@@ -15,7 +15,7 @@ class TestimonialController extends Controller {
         $testimonials = Testimonial::All();
 
         $datos['testimonials'] = $testimonials;
-        return view('auth.admin.testimonials.index', $datos);
+        return view('admin.testimonials.index', $datos);
     }
 
     /**

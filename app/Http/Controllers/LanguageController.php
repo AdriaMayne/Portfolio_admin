@@ -15,7 +15,7 @@ class LanguageController extends Controller {
         $languages = Language::All();
 
         $datos['languages'] = $languages;
-        return view('auth.admin.languages.index', $datos);
+        return view('admin.languages.index', $datos);
     }
 
     /**

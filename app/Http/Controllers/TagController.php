@@ -15,7 +15,7 @@ class TagController extends Controller {
         $tags = Tag::All();
 
         $datos['tags'] = $tags;
-        return view('auth.admin.tags.index', $datos);
+        return view('admin.tags.index', $datos);
     }
 
     /**

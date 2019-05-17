@@ -15,7 +15,7 @@ class ProjectController extends Controller {
         $projects = Project::All();
 
         $datos['projects'] = $projects;
-        return view('auth.admin.projects.index', $datos);
+        return view('admin.projects.index', $datos);
     }
 
     /**
