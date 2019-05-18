@@ -18,11 +18,11 @@
     });
 
     // CRUDS
-    Route::resource('/contacts', 'ContactController');
-    Route::resource('/languages', 'LanguageController');
-    Route::resource('/projects', 'ProjectController');
-    Route::resource('/tags', 'TagController');
-    Route::resource('/testimonials', 'TestimonialController');
+    // Route::resource('/contacts', 'ContactController');
+    // Route::resource('/languages', 'LanguageController');
+    // Route::resource('/projects', 'ProjectController');
+    // Route::resource('/tags', 'TagController');
+    // Route::resource('/testimonials', 'TestimonialController');
 
 // ------------ PRUEBAS ------------
 
@@ -42,9 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
     // CRUDS -- Prueba
-    // Route::resource('/contacts', 'ContactController');
-    // Route::resource('/languages', 'LanguageController');
-    // Route::resource('/projects', 'ProjectController');
-    // Route::resource('/tags', 'TagController');
-    // Route::resource('/testimonials', 'TestimonialController');
+    Route::resource('/contacts', 'ContactController');
+    Route::resource('/languages', 'LanguageController');
+    Route::resource('/projects', 'ProjectController');
+    Route::resource('/tags', 'TagController');
+    Route::resource('/testimonials', 'TestimonialController');
 });
