@@ -1,0 +1,30 @@
+#thumbnail {
+    height: 12vw;
+    width: 12vw;
+    object-fit: cover;
+}
+
+.custom-file-label {
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.modal-body, .modal-content {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.modal-content {
+    height: 60vh;
+    max-width: 96vw;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-clip: padding-box;
+}
+
+@media (max-width: 1024px) {
+    #thumbnail {
+        height: 40vw;
+        width: 40vw;
+    }
+}

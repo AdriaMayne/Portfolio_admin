@@ -12,17 +12,7 @@
 */
 
 // ------------ PRUEBAS ------------
-    // LANDING
-    Route::get('/', function () {
-        return view('landing');
-    });
 
-    // CRUDS
-    // Route::resource('/contacts', 'ContactController');
-    // Route::resource('/languages', 'LanguageController');
-    // Route::resource('/projects', 'ProjectController');
-    // Route::resource('/tags', 'TagController');
-    // Route::resource('/testimonials', 'TestimonialController');
 
 // ------------ PRUEBAS ------------
 
@@ -34,9 +24,9 @@ Route::post('/login', 'Auth\LoginController@login');
 
 Route::group(['middleware' => ['auth']], function () {
     // LANDING -- Prueba
-    // Route::get('/', function () {
-    //     return view('landing');
-    // });
+    Route::get('/', function () {
+        return view('landing');
+    });
 
     // LOGOUT
     Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

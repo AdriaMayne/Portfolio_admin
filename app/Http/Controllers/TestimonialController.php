@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
+use App\Classes\Utilitat;
+use Illuminate\Database\QueryException;
+
 class TestimonialController extends Controller {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request) {
         if($request->has('search')) {
             $search = $request->input('search');
@@ -29,62 +27,82 @@ class TestimonialController extends Controller {
         return view('admin.testimonials.index', $datos);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
-        //
+        $testCount = Testimonial::count() + 1;
+        $datos['orderNumbers'] = [];
+
+        for ($i = 0; $i < $testCount; $i++) {
+            array_push($datos['orderNumbers'], ($i + 1));
+        }
+        $datos['lastNum'] = end($datos['orderNumbers']);
+
+        return view('admin.testimonials.new', $datos);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
-        //
+        $testimonial = new Testimonial;
+        $testimonial->title =  $request->input('title');
+        $testimonial->message =  $request->input('message');
+        $testimonial->name =  $request->input('name');
+        $testimonial->url =  $request->input('url');
+        // $testimonial->image =  $request->input('name'); -- Necesario
+        $testimonial->image = "default";
+        $testimonial->order =  $request->input('order');
+        // $testimonial->visible =  $request->input('visible');
+
+        try {
+            $testimonial->save();
+
+            $success = "Testimonial creado correctamente";
+            $request->session()->flash('success', $success);
+        } catch (QueryException $e) {
+            $error= Utilitat::errorMessage($e);
+            $request->session()->flash('error', $error);
+
+            return redirect()->action('TestimonialController@create')->withInput();
+        }
+        return redirect()->action('TestimonialController@index')->withInput();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
     public function show(Testimonial $testimonial) {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Testimonial $testimonial) {
-        //
+        $datos['testimonial'] = $testimonial;
+        $testCount = Testimonial::count();
+        $datos['orderNumbers'] = [];
+
+        for ($i = 0; $i < $testCount; $i++) {
+            array_push($datos['orderNumbers'], ($i + 1));
+        }
+
+        return view('admin.testimonials.update', $datos);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Testimonial $testimonial) {
-        //
+        $testimonial->title =  $request->input('title');
+        $testimonial->message =  $request->input('message');
+        $testimonial->name =  $request->input('name');
+        $testimonial->url =  $request->input('url');
+        // $testimonial->image =  $request->input('name');
+        $testimonial->order =  $request->input('order');
+        // $testimonial->visible =  $request->input('visible');
+
+        try {
+            $testimonial->save();
+
+            $success = "Testimonial editado correctamente";
+            $request->session()->flash('success', $success);
+        } catch (QueryException $e) {
+            $error= Utilitat::errorMessage($e);
+            $request->session()->flash('error', $error);
+
+            return redirect()->action('TestimonialController@edit')->withInput();
+        }
+        return redirect()->action('TestimonialController@index')->withInput();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Testimonial $testimonial) {
         try {
             $testimonial->delete();

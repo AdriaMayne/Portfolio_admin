@@ -53,3 +53,11 @@ $('#modalLanguages').on('show.bs.modal', function (event) {
     $('#modal-form').attr('action', action);
     modal.find('.modal-body').text(id + ' - ' + name);
 });
+
+$('#modalTestNew').on('show.bs.modal', function (event) {
+    // Info
+    var imageUrl = $('#thumbnail').attr('src');
+    var modal = $(this);
+
+    modal.find('.modal-content').css('background-image', 'url(' + imageUrl + ')');
+});
