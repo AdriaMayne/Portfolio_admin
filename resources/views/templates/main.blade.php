@@ -9,6 +9,9 @@
 
         <title>Landing - AdriaMayne</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('media/img/logo.png') }}">
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
 
@@ -37,9 +40,11 @@
         </div>
         <div id="app">
             <main class="py-2">
-                <a id="navController">
-                    <span style="font-size:25px;cursor:pointer">&#9776;</span>
-                </a>
+                <div class="container-fluid">
+                    <a id="navController">
+                        <span style="font-size:25px;cursor:pointer">&#9776;</span>
+                    </a>
+                </div>
                 @yield('content')
             </main>
         </div>

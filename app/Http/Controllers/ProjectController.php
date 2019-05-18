@@ -11,10 +11,20 @@ class ProjectController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $projects = Project::All();
-
+    public function index(Request $request) {
+        if($request->has('search')) {
+            $search = $request->input('search');
+            $projects = Project::where('title', 'like', '%' . $search . '%')
+                                    ->orderBy('title')
+                                    ->paginate(10);
+        } else {
+            $projects = Project::orderBy('title')
+                                    ->paginate(10);
+            $search = "";
+        }
         $datos['projects'] = $projects;
+        $datos['search'] = $search;
+
         return view('admin.projects.index', $datos);
     }
 
@@ -75,6 +85,12 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project) {
-        //
+        try {
+            $project->delete();
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
+            $request->session()->flash('error', $error);
+        }
+        return redirect()->action('ProjectController@index');
     }
 }

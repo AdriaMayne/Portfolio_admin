@@ -1,5 +1,7 @@
 $('#modalTestimonials').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
+
+    // Info
     var id = button.data('id');
     var name = button.data('name');
     var title = button.data('title');
@@ -11,4 +13,43 @@ $('#modalTestimonials').on('show.bs.modal', function (event) {
 
     $('#modal-form').attr('action', action);
     modal.find('.modal-body').html(html);
-})
+});
+
+$('#modalProjects').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+
+    // Info
+    var id = button.data('id');
+    var title = button.data('title');
+    var action = button.data('action');
+    var modal = $(this);
+
+    $('#modal-form').attr('action', action);
+    modal.find('.modal-body').text(id + ' - ' + title);
+});
+
+$('#modalTags').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+
+    // Info
+    var id = button.data('id');
+    var title = button.data('title');
+    var action = button.data('action');
+    var modal = $(this);
+
+    $('#modal-form').attr('action', action);
+    modal.find('.modal-body').text(id + ' - ' + title);
+});
+
+$('#modalLanguages').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+
+    // Info
+    var id = button.data('id');
+    var name = button.data('name');
+    var action = button.data('action');
+    var modal = $(this);
+
+    $('#modal-form').attr('action', action);
+    modal.find('.modal-body').text(id + ' - ' + name);
+});

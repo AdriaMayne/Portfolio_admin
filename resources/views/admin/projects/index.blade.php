@@ -4,13 +4,13 @@
     <div class="container-fluid">
         <div class="card mt-2">
             <div class="card-body">
-                <a class="btn btn-primary" href="{{ url('testimonials/create') }}">Nuevo TESTIMONIAL</a>
+                <a class="btn btn-primary" href="{{ url('projects/create') }}">Nuevo PROYECTO</a>
                 @include('partial.errores')
             </div>
         </div>
         <div class="card mt-2">
             <div class="card-body">
-                <form action="{{ url('testimonials') }}" method="get">
+                <form action="{{ url('projects') }}" method="get">
                         <div class="form-group my-2 col-12 mx-auto">
                             <label for="search" class="">Búsqueda</label>
                             <div class="row">
@@ -27,47 +27,42 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
                             <th scope="col">Título</th>
-                            <th scope="col">Mensaje</th>
-                            <th scope="col">Posición</th>
-                            <th scope="col">Visible</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">URL</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($testimonials as $testimonial)
+                        @forelse ($projects as $project)
                         <tr>
-                            <td>{{ $testimonial->id }}</td>
-                            <td>{{ $testimonial->name }}</td>
-                            <td>{{ $testimonial->title }}</td>
-                            <td>{{ $testimonial->message }}</td>
-                            <td>{{ $testimonial->order }}</td>
-                            <td>{{ $testimonial->visible }}</td>
+                            <td>{{ $project->id }}</td>
+                            <td>{{ $project->title }}</td>
+                            <td>{{ $project->image }}</td>
+                            <td>{{ $project->url }}</td>
                             <td class="col-button">
-                                <form action="{{ action('TestimonialController@edit', [$testimonial->id]) }}" method="get">
+                                <form action="{{ action('ProjectController@edit', [$project->id]) }}" method="get">
                                     <button type="submit" class="btn btn-secondary btn-sm float-right"><i class="fas fa-edit"></i> EDITAR</button>
                                 </form>
                             </td>
                             <td class="col-button">
-                                <button type="button" class="btn btn-danger btn-sm ml-3 float-right" data-toggle="modal" data-target="#modalTestimonials" data-id="{{ $testimonial->id }}" data-name="{{ $testimonial->name }}" data-title="{{ $testimonial->title }}" data-message="{{ $testimonial->message }}" data-action="{{ action('TestimonialController@destroy', [$testimonial->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
+                                <button type="button" class="btn btn-danger btn-sm ml-3 float-right" data-toggle="modal" data-target="#modalProjects" data-id="{{ $project->id }}" data-title="{{ $project->title }}" data-action="{{ action('ProjectController@destroy', [$project->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
                             </td>
                         </tr>
                         @empty
                             <td>No se han encontrado registros en la BD.</td>
                             <td></td><td></td>
                             <td></td><td></td>
-                            <td></td><td></td>
                             <td></td>
                         @endforelse
                     </tbody>
                 </table>
-                {{ $testimonials->appends(['search' => $search])->links() }}
+                {{ $projects->appends(['search' => $search])->links() }}
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalTestimonials" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal fade" id="modalProjects" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

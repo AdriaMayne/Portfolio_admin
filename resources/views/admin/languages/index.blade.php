@@ -4,13 +4,13 @@
     <div class="container-fluid">
         <div class="card mt-2">
             <div class="card-body">
-                <a class="btn btn-primary" href="{{ url('testimonials/create') }}">Nuevo TESTIMONIAL</a>
+                <a class="btn btn-primary" href="{{ url('languages/create') }}">Nuevo LENGUAJE</a>
                 @include('partial.errores')
             </div>
         </div>
         <div class="card mt-2">
             <div class="card-body">
-                <form action="{{ url('testimonials') }}" method="get">
+                <form action="{{ url('languages') }}" method="get">
                         <div class="form-group my-2 col-12 mx-auto">
                             <label for="search" class="">Búsqueda</label>
                             <div class="row">
@@ -28,30 +28,30 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Mensaje</th>
-                            <th scope="col">Posición</th>
+                            <th scope="col">Porcentaje</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Categoría</th>
                             <th scope="col">Visible</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($testimonials as $testimonial)
+                        @forelse ($languages as $language)
                         <tr>
-                            <td>{{ $testimonial->id }}</td>
-                            <td>{{ $testimonial->name }}</td>
-                            <td>{{ $testimonial->title }}</td>
-                            <td>{{ $testimonial->message }}</td>
-                            <td>{{ $testimonial->order }}</td>
-                            <td>{{ $testimonial->visible }}</td>
+                            <td>{{ $language->id }}</td>
+                            <td>{{ $language->name }}</td>
+                            <td>{{ $language->percentage }}</td>
+                            <td>{{ $language->image }}</td>
+                            <td>{{ $language->category }}</td>
+                            <td>{{ $language->visible }}</td>
                             <td class="col-button">
-                                <form action="{{ action('TestimonialController@edit', [$testimonial->id]) }}" method="get">
+                                <form action="{{ action('LanguageController@edit', [$language->id]) }}" method="get">
                                     <button type="submit" class="btn btn-secondary btn-sm float-right"><i class="fas fa-edit"></i> EDITAR</button>
                                 </form>
                             </td>
                             <td class="col-button">
-                                <button type="button" class="btn btn-danger btn-sm ml-3 float-right" data-toggle="modal" data-target="#modalTestimonials" data-id="{{ $testimonial->id }}" data-name="{{ $testimonial->name }}" data-title="{{ $testimonial->title }}" data-message="{{ $testimonial->message }}" data-action="{{ action('TestimonialController@destroy', [$testimonial->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
+                                <button type="button" class="btn btn-danger btn-sm ml-3 float-right" data-toggle="modal" data-target="#modalLanguages" data-id="{{ $language->id }}" data-name="{{ $language->name }}" data-action="{{ action('LanguageController@destroy', [$language->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
                             </td>
                         </tr>
                         @empty
@@ -63,11 +63,11 @@
                         @endforelse
                     </tbody>
                 </table>
-                {{ $testimonials->appends(['search' => $search])->links() }}
+                {{ $languages->appends(['search' => $search])->links() }}
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalTestimonials" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal fade" id="modalLanguages" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

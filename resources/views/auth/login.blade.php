@@ -10,6 +10,7 @@
 
         <title>LOGIN - AdriaMayne</title>
 
+        <!-- Favicon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('media/img/logo.png') }}">
 
         <!-- Scripts -->

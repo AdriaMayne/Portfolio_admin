@@ -86,6 +86,12 @@ class TestimonialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Testimonial $testimonial) {
-        //
+        try {
+            $testimonial->delete();
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
+            $request->session()->flash('error', $error);
+        }
+        return redirect()->action('TestimonialController@index');
     }
 }

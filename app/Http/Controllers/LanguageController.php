@@ -11,10 +11,20 @@ class LanguageController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $languages = Language::All();
-
+    public function index(Request $request) {
+        if($request->has('search')) {
+            $search = $request->input('search');
+            $languages = Language::where('name', 'like', '%' . $search . '%')
+                                    ->orderBy('name')
+                                    ->paginate(10);
+        } else {
+            $languages = Language::orderBy('name')
+                                    ->paginate(10);
+            $search = "";
+        }
         $datos['languages'] = $languages;
+        $datos['search'] = $search;
+
         return view('admin.languages.index', $datos);
     }
 
@@ -75,6 +85,12 @@ class LanguageController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Language $language) {
-        //
+        try {
+            $language->delete();
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
+            $request->session()->flash('error', $error);
+        }
+        return redirect()->action('LanguageController@index');
     }
 }
