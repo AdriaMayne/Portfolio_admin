@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Classes\Utilitat;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class TestimonialController extends Controller {
     public function index(Request $request) {
@@ -45,15 +48,44 @@ class TestimonialController extends Controller {
         $testimonial->message =  $request->input('message');
         $testimonial->name =  $request->input('name');
         $testimonial->url =  $request->input('url');
-        // $testimonial->image =  $request->input('name'); -- Necesario
-        $testimonial->image = "default";
-        $testimonial->order =  $request->input('order');
-        // $testimonial->visible =  $request->input('visible');
+        $testimonial->image = "";
+
+        if ($request->has('visible')) {
+            $testimonial->visible =  1;
+        } else {
+            $testimonial->visible =  0;
+        }
+
+        $fichero = $request->file('image');
 
         try {
             $testimonial->save();
 
-            $success = "Testimonial creado correctamente";
+            $newOrder =  $request->input('order');
+            $testCount = Testimonial::count() + 1;
+
+            if ($testCount != $newOrder) {
+                $testimonials = Testimonial::where('order', '>=', $newOrder)
+                                                ->get();
+
+                foreach ($testimonials as $currentTestimonial) {
+                    $currentTestimonial->order = $currentTestimonial->order + 1;
+                    $currentTestimonial->save();
+                }
+
+                $testimonial->order =  $newOrder;
+            }
+
+            if($fichero) {
+                $imagen_path = 'Testimonial_' . $testimonial->id . "." . $fichero->getClientOriginalExtension();
+
+                Storage::disk('public')->putFileAs('testimonials/', $fichero, $imagen_path);
+                $testimonial->image =  'storage/testimonials/' . $imagen_path;
+            }
+
+            $testimonial->save();
+
+            $success = "Testimonial creado correctamente.";
             $request->session()->flash('success', $success);
         } catch (QueryException $e) {
             $error= Utilitat::errorMessage($e);
@@ -76,6 +108,11 @@ class TestimonialController extends Controller {
         for ($i = 0; $i < $testCount; $i++) {
             array_push($datos['orderNumbers'], ($i + 1));
         }
+        $datos['original_image'] = "media/img/default_image.png";
+
+        if ($testimonial->image != "") {
+            $datos['original_image'] = $testimonial->image;
+        }
 
         return view('admin.testimonials.update', $datos);
     }
@@ -85,20 +122,55 @@ class TestimonialController extends Controller {
         $testimonial->message =  $request->input('message');
         $testimonial->name =  $request->input('name');
         $testimonial->url =  $request->input('url');
-        // $testimonial->image =  $request->input('name');
-        $testimonial->order =  $request->input('order');
-        // $testimonial->visible =  $request->input('visible');
+        $newOrder =  $request->input('order');
+
+        if ($testimonial->order != $newOrder) {
+            $testimonials = Testimonial::where('order', '>=', min($newOrder, $testimonial->order))
+                                            ->where('order', '<=', max($newOrder, $testimonial->order))
+                                            ->get();
+
+            foreach ($testimonials as $currentTestimonial) {
+                if (($currentTestimonial->order <= $newOrder) && ($currentTestimonial->order > $testimonial->order)) {
+                    $currentTestimonial->order = $currentTestimonial->order - 1;
+                } else if (($currentTestimonial->order >= $newOrder) && ($currentTestimonial->order < $testimonial->order)) {
+                    $currentTestimonial->order = $currentTestimonial->order + 1;
+                }
+
+                $currentTestimonial->save();
+            }
+
+            $testimonial->order =  $newOrder;
+        }
+
+
+        if ($request->has('visible')) {
+            $testimonial->visible =  1;
+        } else {
+            $testimonial->visible =  0;
+        }
+
+        $fichero = $request->file('image');
 
         try {
+            if($fichero) {
+                if( Storage::disk('public')->exists($testimonial->image)){
+                    Storage::disk('public')->delete($testimonial->image);
+                }
+
+                $imagen_path = 'Testimonial_' . $testimonial->id . "." . $fichero->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('testimonials/', $fichero, $imagen_path);
+                $testimonial->image =  'storage/testimonials/' . $imagen_path;
+            }
+
             $testimonial->save();
 
-            $success = "Testimonial editado correctamente";
+            $success = "Testimonial editado correctamente.";
             $request->session()->flash('success', $success);
         } catch (QueryException $e) {
             $error= Utilitat::errorMessage($e);
             $request->session()->flash('error', $error);
 
-            return redirect()->action('TestimonialController@edit')->withInput();
+            return redirect()->action('TestimonialController@edit', [$testimonial->id])->withInput();
         }
         return redirect()->action('TestimonialController@index')->withInput();
     }

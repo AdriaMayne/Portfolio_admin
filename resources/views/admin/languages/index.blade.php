@@ -17,7 +17,7 @@
                                 <div class="col-10">
                                     <input id="search" class="form-control" name="search" type="text" placeholder="" value="{{ $search }}">
                                 </div>
-                                <div class="col-2">
+                                <div class="col-2 text-center">
                                     <button type="submit" class="btn btn-secondary col-10">Buscar</button>
                                 </div>
                             </div>
@@ -44,7 +44,13 @@
                             <td>{{ $language->percentage }}</td>
                             <td>{{ $language->image }}</td>
                             <td>{{ $language->category }}</td>
-                            <td>{{ $language->visible }}</td>
+                            <td>
+                                @if ($language->visible == 1)
+                                    <input type="checkbox" id="visible" name="visible" value="{{ $language->visible }}" disabled checked>
+                                @else
+                                    <input type="checkbox" id="visible" name="visible" value="{{ $language->visible }}" disabled>
+                                @endif
+                            </td>
                             <td class="col-button">
                                 <form action="{{ action('LanguageController@edit', [$language->id]) }}" method="get">
                                     <button type="submit" class="btn btn-secondary btn-sm float-right"><i class="fas fa-edit"></i> EDITAR</button>

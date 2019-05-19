@@ -17,7 +17,7 @@
                                 <div class="col-10">
                                     <input id="search" class="form-control" name="search" type="text" placeholder="" value="{{ $search }}">
                                 </div>
-                                <div class="col-2">
+                                <div class="col-2 text-center">
                                     <button type="submit" class="btn btn-secondary col-10">Buscar</button>
                                 </div>
                             </div>
@@ -44,7 +44,13 @@
                             <td>{{ $testimonial->title }}</td>
                             <td>{{ $testimonial->message }}</td>
                             <td>{{ $testimonial->order }}</td>
-                            <td>{{ $testimonial->visible }}</td>
+                            <td>
+                                @if ($testimonial->visible == 1)
+                                    <input type="checkbox" id="visible" name="visible" value="{{ $testimonial->visible }}" disabled checked>
+                                @else
+                                    <input type="checkbox" id="visible" name="visible" value="{{ $testimonial->visible }}" disabled>
+                                @endif
+                            </td>
                             <td class="col-button">
                                 <form action="{{ action('TestimonialController@edit', [$testimonial->id]) }}" method="get">
                                     <button type="submit" class="btn btn-secondary btn-sm float-right"><i class="fas fa-edit"></i> EDITAR</button>
@@ -56,10 +62,8 @@
                         </tr>
                         @empty
                             <td>No se han encontrado registros en la BD.</td>
-                            <td></td><td></td>
-                            <td></td><td></td>
-                            <td></td><td></td>
-                            <td></td>
+                            <td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td>
                         @endforelse
                     </tbody>
                 </table>

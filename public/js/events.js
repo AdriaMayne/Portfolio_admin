@@ -1,5 +1,5 @@
 var defaultImage = $('#thumbnail').attr('src');
-var defaultImgLabel = $(".custom-file-label").text();
+var defaultImgLabel = "Seleccionar Archivo";
 
 $("#image").change(function (){
     var fileName = $(this).val();
@@ -21,3 +21,21 @@ function readURL(input) {
         $(".custom-file-label").html(defaultImgLabel);
     }
 }
+
+$('input[type="checkbox"]').change(function(){
+    this.value = (Number(this.checked));
+});
+
+$('#percentage').on('input', function() {
+    rangeSlider();
+});
+
+function rangeSlider() {
+    var element = $('#percentage');
+    var total = element.val();
+    var defaultLabel = "Porcentaje * - ";
+
+    $('#percentageRangeLabel').text(defaultLabel + total + "%");
+}
+
+rangeSlider();

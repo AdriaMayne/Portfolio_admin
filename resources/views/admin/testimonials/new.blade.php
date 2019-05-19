@@ -59,7 +59,15 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-12 mb-2 mt-4">
+                <div class="form-group col-12 mt-2">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="visible" name="visible" value="1" checked>
+                        <label class="custom-control-label" for="visible">Visible</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12 mb-2 mt-2">
                     <a href="{{ url('/testimonials') }}" class="btn btn-secondary btn-lg"><i class="fas fa-arrow-left mr-2"></i> Volver</a>
                     <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-plus mr-2"></i> Añadir</button>
                 </div>

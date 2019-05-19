@@ -1,7 +1,7 @@
 <?php
-    namespace App\Clases;
+    namespace App\Classes;
 
-    class Utilitat{
+    class Utilitat {
         public static function errorMessage($e){
             if(!empty($e->errorInfo[1])){
                 switch($e->errorInfo[1]){
