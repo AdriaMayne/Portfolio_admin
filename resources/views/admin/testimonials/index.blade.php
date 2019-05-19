@@ -57,7 +57,7 @@
                                 </form>
                             </td>
                             <td class="col-button">
-                                <button type="button" class="btn btn-danger btn-sm ml-3 float-right" data-toggle="modal" data-target="#modalTestimonials" data-id="{{ $testimonial->id }}" data-name="{{ $testimonial->name }}" data-title="{{ $testimonial->title }}" data-message="{{ $testimonial->message }}" data-action="{{ action('TestimonialController@destroy', [$testimonial->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalTestimonials" data-id="{{ $testimonial->id }}" data-name="{{ $testimonial->name }}" data-title="{{ $testimonial->title }}" data-message="{{ $testimonial->message }}" data-action="{{ action('TestimonialController@destroy', [$testimonial->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
                             </td>
                         </tr>
                         @empty

@@ -32,11 +32,11 @@
                 <img src="{{ asset('media/img/logo_white.png') }}" alt="AdriaMayne Logo">
             </a>
             <a href="{{ url('/') }}"><i class="fas fa-home"></i> Landing</a>
-            <a href="{{ url('/contacts') }}"><i class="fas fa-envelope"></i> Contacto</a>
+            <a href="{{ url('/contacts') }}"><i class="fas fa-comments"></i> Contacto</a>
             <a href="{{ url('/languages') }}"><i class="fas fa-code"></i> Lenguajes</a>
             <a href="{{ url('/projects') }}"><i class="fas fa-briefcase"></i> Proyectos</a>
             <a href="{{ url('/tags') }}"><i class="fas fa-tag"></i> Tags</a>
-            <a href="{{ url('/testimonials') }}"><i class="fas fa-comments"></i> Testimonials</a>
+            <a href="{{ url('/testimonials') }}"><i class="fas fa-quote-left"></i> Testimonials</a>
             <a class="signout" href="{{ url('/logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
         <div id="app">
