@@ -57,7 +57,7 @@
                                 </form>
                             </td>
                             <td class="col-button">
-                                <button type="button" class="btn btn-danger btn-sm ml-3 float-right" data-toggle="modal" data-target="#modalLanguages" data-id="{{ $language->id }}" data-name="{{ $language->name }}" data-action="{{ action('LanguageController@destroy', [$language->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalLanguages" data-id="{{ $language->id }}" data-name="{{ $language->name }}" data-action="{{ action('LanguageController@destroy', [$language->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
                             </td>
                         </tr>
                         @empty

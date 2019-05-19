@@ -16,14 +16,14 @@
                     <input type="text" name="name" id="name" class="form-control col-12" placeholder="Introduce el nombre" value="{{ old('name') }}" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="order">Categoria *</label>
-                    <select name="order" id="order" class="form-control" required>
-                        @if (old('order') == 1)
-                            <option value="0">Frontend</option>
-                            <option value="1" selected>Backend</option>
+                    <label for="category">Categoria *</label>
+                    <select name="category" id="category" class="form-control" required>
+                        @if (old('category') == 1)
+                            <option value=0>Frontend</option>
+                            <option value=1 selected>Backend</option>
                         @else
-                            <option value="0">Frontend</option>
-                            <option value="1">Backend</option>
+                            <option value=0>Frontend</option>
+                            <option value=1>Backend</option>
                         @endif
                     </select>
                 </div>
@@ -31,8 +31,8 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label id="percentageRangeLabel" for="percentage">Porcentaje *</label>
-                    @if (old('order'))
-                        <input type="range" class="custom-range" min="0" max="100" step="1" id="percentage" name="percentage" value="{{ old('url') }}">
+                    @if (old('percentage'))
+                        <input type="range" class="custom-range" min="0" max="100" step="1" id="percentage" name="percentage" value="{{ old('percentage') }}">
                     @else
                         <input type="range" class="custom-range" min="0" max="100" step="1" id="percentage" name="percentage" value="0">
                     @endif
