@@ -49,7 +49,7 @@
                     </div>
                     <div class="custom-file">
                         <input type="file" name="image" id="image" class="custom-file-input" value="{{ old('image') }}">
-                    <label class="custom-file-label" for="image">{{ $language->image}}</label>
+                    <label class="custom-file-label" for="image">{{ $language->image }}</label>
                     </div>
                 </div>
             </div>

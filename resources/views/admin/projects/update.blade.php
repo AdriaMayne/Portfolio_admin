@@ -25,12 +25,12 @@
                     <label for="image">Imagen *</label>
                     <div class="row mb-3">
                         <a class="mx-auto" data-toggle="modal" data-target="#modalTestNew">
-                            <img id="thumbnail" class="img-thumbnail mx-auto" src="{{ asset('media/img/default_image.png') }}">
+                            <img id="thumbnail" class="img-thumbnail mx-auto" src="{{ asset($original_image) }}">
                         </a>
                     </div>
                     <div class="custom-file">
                         <input type="file" name="image" id="image" class="custom-file-input" value="{{ $project->image }}" required>
-                        <label class="custom-file-label" for="image">Seleccionar Archivo</label>
+                        <label class="custom-file-label" for="image">{{ $project->image }}</label>
                     </div>
                 </div>
             </div>
