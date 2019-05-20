@@ -8,7 +8,7 @@
     <div class="container">
         <h4 class="text-center my-4 my-md-5">Editar PROYECTO</h4>
         @include('partial.errores')
-        <form action="{{ action('ProjectController@update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ action('ProjectController@update', [$project->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
