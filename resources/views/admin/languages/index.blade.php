@@ -26,7 +26,7 @@
                 <table class="table table-striped table-hover table-responsive-lg mt-5 text-center">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Porcentaje</th>
                             <th scope="col">Imagen</th>

@@ -6,75 +6,37 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index() {
-        $contacts = Contact::All();
-
+    public function index(Request $request) {
+        if($request->has('search')) {
+            $search = $request->input('search');
+            $contacts = Contact::where('subject', 'like', '%' . $search . '%')
+                                    ->orWhere('name', 'like', '%' . $search . '%')
+                                    ->orderBy('date')
+                                    ->paginate(10);
+        } else {
+            $contacts = Contact::orderBy('date')
+                                    ->paginate(10);
+            $search = "";
+        }
         $datos['contacts'] = $contacts;
+        $datos['search'] = $search;
+
         return view('admin.contacts.index', $datos);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request) {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
     public function show(Contact $contact) {
-        //
+        $datos['contact'] = $contact;
+
+        return view('admin.contacts.view', $datos);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Contact $contact) {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Contact $contact) {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Contact $contact) {
-        //
+        try {
+            $contact->delete();
+        } catch (QueryException $e) {
+            $error = Utilitat::errorMessage($e);
+            $request->session()->flash('error', $error);
+        }
+        return redirect()->action('ContactController@index');
     }
 }

@@ -61,3 +61,21 @@ $('#modalTestNew').on('show.bs.modal', function (event) {
 
     modal.find('.modal-content').css('background-image', 'url(' + imageUrl + ')');
 });
+
+$('#modalContacts').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+
+    // Info
+    var id = button.data('id');
+    var subject = button.data('subject');
+    var name = button.data('name');
+    var email = button.data('email');
+    var message = button.data('message');
+    var action = button.data('action');
+    var modal = $(this);
+
+    var html = "<h5 class='font-weight-bold'>" + subject + "</h5><blockquote class='blockquote text-justify'><p class='mb-0'>" + message + "</p><footer class='blockquote-footer text-right'>" + name + " (" + email + ")" + "</footer></blockquote>";
+
+    $('#modal-form').attr('action', action);
+    modal.find('.modal-body').html(html);
+});
