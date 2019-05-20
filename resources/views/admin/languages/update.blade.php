@@ -68,7 +68,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12 mb-2 mt-2">
                     <a href="{{ url('/languages') }}" class="btn btn-secondary btn-lg"><i class="fas fa-arrow-left mr-2"></i> Volver</a>
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-plus mr-2"></i> Actualizar</button>
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-edit mr-2"></i> Actualizar</button>
                 </div>
             </div>
             <small class="mx-0 p-0">Los campos indicados con * son obligatorios.</small>

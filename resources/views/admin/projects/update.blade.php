@@ -9,6 +9,7 @@
         <h4 class="text-center my-4 my-md-5">Editar PROYECTO</h4>
         @include('partial.errores')
         <form action="{{ action('ProjectController@update', [$project->id]) }}" method="POST" enctype="multipart/form-data">
+            @method('put')
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -16,8 +17,8 @@
                     <input type="text" name="title" id="title" class="form-control col-12" placeholder="Introduce el título" value="{{ $project->title }}" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="name">URL *</label>
-                    <input type="text" name="url" id="url" class="form-control col-12" placeholder="Introduce la URL" value="{{ $project->url }}" required>
+                    <label for="name">URL</label>
+                    <input type="text" name="url" id="url" class="form-control col-12" placeholder="Introduce la URL" value="{{ $project->url }}">
                 </div>
             </div>
             <div class="form-row">
@@ -49,7 +50,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12 mb-2 mt-2">
                     <a href="{{ url('/projects') }}" class="btn btn-secondary btn-lg"><i class="fas fa-arrow-left mr-2"></i> Volver</a>
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-plus mr-2"></i> Añadir</button>
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-edit mr-2"></i> Actualizar</button>
                 </div>
             </div>
             <small class="mx-0 p-0">Los campos indicados con * son obligatorios.</small>

@@ -16,8 +16,8 @@
                     <input type="text" name="title" id="title" class="form-control col-12" placeholder="Introduce el título" value="{{ old('title') }}" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="name">URL *</label>
-                    <input type="text" name="url" id="url" class="form-control col-12" placeholder="Introduce la URL" value="{{ old('url') }}" required>
+                    <label for="name">URL</label>
+                    <input type="text" name="url" id="url" class="form-control col-12" placeholder="Introduce la URL" value="{{ old('url') }}">
                 </div>
             </div>
             <div class="form-row">
