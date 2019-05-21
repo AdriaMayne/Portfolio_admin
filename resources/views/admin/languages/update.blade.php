@@ -1,5 +1,9 @@
 @extends('templates.main')
 
+@section('title')
+Languages - Edit
+@endsection
+
 @section('own_css')
     <link href="{{ asset('css/crud.css') }}" rel="stylesheet">
 @endsection

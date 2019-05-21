@@ -1,5 +1,10 @@
 @extends('templates.main')
 
+@section('title')
+Testimonials - Index
+@endsection
+
+
 @section('content')
     <div class="container-fluid">
         <div class="card mt-2">

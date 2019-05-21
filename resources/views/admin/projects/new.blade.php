@@ -1,6 +1,16 @@
 @extends('templates.main')
 
+@section('title')
+Projects - New
+@endsection
+
+@section('own_js_top')
+    <script src="{{ asset('libs/Bootstrap-Select/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('libs/Bootstrap-Select/js/defaults-es_ES.js') }}"></script>
+@endsection
+
 @section('own_css')
+    <link href="{{ asset('libs/Bootstrap-Select/css/bootstrap-select.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crud.css') }}" rel="stylesheet">
 @endsection
 
@@ -32,6 +42,16 @@
                         <input type="file" name="image" id="image" class="custom-file-input" value="{{ old('image') }}" required>
                         <label class="custom-file-label" for="image">Seleccionar Archivo</label>
                     </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12 mt-2">
+                    <label for="tags">Tags</label>
+                    <select name="tags[]" id="tags" class="selectpicker form-control" data-live-search="true" title="Select tags" multiple data-actions-box="true" data-size="5">
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-row">

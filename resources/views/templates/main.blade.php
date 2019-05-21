@@ -7,13 +7,14 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Landing - AdriaMayne</title>
+        <title>@yield('title')</title>
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('media/img/logo.png') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+        @yield('own_js_top')
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">

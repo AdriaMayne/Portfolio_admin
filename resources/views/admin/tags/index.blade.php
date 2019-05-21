@@ -1,10 +1,22 @@
 @extends('templates.main')
 
+@section('title')
+Tags - Index
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="card mt-2">
             <div class="card-body">
-                <a class="btn btn-primary" href="{{ url('tags/create') }}">Nuevo TESTIMONIAL</a>
+                <form class="form-inline" action="{{ action('TagController@store') }}" method="POST">
+                    @csrf
+                    <div class="input-group mb-1 col-md-10">
+                        <input type="text" class="form-control form-control-lg" id="title" name="title" placeholder="Nuevo tag" autofocus>
+                    </div>
+                    <div class="input-group mb-1 col-md-2">
+                        <button type="submit" class="btn btn-primary btn-lg col-md-12 mx-auto"><i class="fas fa-plus mr-2"></i> Añadir</button>
+                    </div>
+                </form>
                 @include('partial.errores')
             </div>
         </div>
@@ -14,41 +26,35 @@
                         <div class="form-group my-2 col-12 mx-auto">
                             <label for="search" class="">Búsqueda</label>
                             <div class="row">
-                                <div class="col-10">
-                                    <input id="search" class="form-control" name="search" type="text" placeholder="" value="{{ $search }}">
+                                <div class="col-md-10">
+                                    <input id="search" class="form-control mt-1" name="search" type="text" placeholder="" value="{{ $search }}">
                                 </div>
-                                <div class="col-2">
-                                    <button type="submit" class="btn btn-secondary col-10">Buscar</button>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-secondary mt-1 col-md-10">Buscar</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-                <table class="table table-striped table-hover table-responsive-lg mt-5 text-center">
+                <table class="table table-striped table-hover table-sm mt-5 text-center">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">ID</th>
+                            <th hidden scope="col">#</th>
                             <th scope="col">Título</th>
-                            <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($tags as $tag)
                         <tr>
-                            <td>{{ $tag->id }}</td>
+                            <td hidden>{{ $tag->id }}</td>
                             <td>{{ $tag->title }}</td>
-                            <td class="col-button">
-                                <form action="{{ action('TagController@edit', [$tag->id]) }}" method="get">
-                                    <button type="submit" class="btn btn-secondary btn-sm float-right"><i class="fas fa-edit"></i> EDITAR</button>
-                                </form>
-                            </td>
-                            <td class="col-button">
-                                <button type="button" class="btn btn-danger btn-sm ml-3 float-right" data-toggle="modal" data-target="#modalTags" data-id="{{ $tag->id }}" data-title="{{ $tag->title }}" data-action="{{ action('TagController@destroy', [$tag->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm ml-3" data-toggle="modal" data-target="#modalTags" data-id="{{ $tag->id }}" data-title="{{ $tag->title }}" data-action="{{ action('TagController@destroy', [$tag->id]) }}"><i class="fas fa-trash"></i> BORRAR</button>
                             </td>
                         </tr>
                         @empty
                             <td>No se han encontrado registros en la BD.</td>
-                            <td></td><td></td><td></td>
+                            <td></td>
                         @endforelse
                     </tbody>
                 </table>

@@ -10,4 +10,8 @@ class Project extends Model {
     public $incrementing = 'true';
     protected $keyType = 'int';
     public $timestamps = false;
+
+    public function tags(){
+        return $this->belongsToMany('App\Models\Tag', 'project_tag', 'project_id', 'tag_id');
+    }
 }

@@ -1,5 +1,9 @@
 @extends('templates.main')
 
+@section('title')
+Projects - Index
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="card mt-2">
@@ -23,7 +27,7 @@
                             </div>
                         </div>
                     </form>
-                <table class="table table-striped table-hover table-responsive-lg mt-5 text-center">
+                <table class="table table-striped table-hover table-responsive-md mt-5 text-center">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>

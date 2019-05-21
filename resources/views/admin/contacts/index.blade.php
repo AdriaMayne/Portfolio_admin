@@ -1,5 +1,9 @@
 @extends('templates.main')
 
+@section('title')
+Contacts - Index
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="card mt-2">

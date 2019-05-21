@@ -1,5 +1,9 @@
 @extends('templates.main')
 
+@section('title')
+Contacts - View
+@endsection
+
 @section('own_css')
     <link href="{{ asset('css/crud.css') }}" rel="stylesheet">
 @endsection

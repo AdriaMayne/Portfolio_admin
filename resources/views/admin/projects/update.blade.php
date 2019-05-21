@@ -1,6 +1,16 @@
 @extends('templates.main')
 
+@section('title')
+Projects - Edit
+@endsection
+
+@section('own_js_top')
+    <script src="{{ asset('libs/Bootstrap-Select/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('libs/Bootstrap-Select/js/defaults-es_ES.js') }}"></script>
+@endsection
+
 @section('own_css')
+    <link href="{{ asset('libs/Bootstrap-Select/css/bootstrap-select.css') }}" rel="stylesheet">
     <link href="{{ asset('css/crud.css') }}" rel="stylesheet">
 @endsection
 
@@ -30,9 +40,23 @@
                         </a>
                     </div>
                     <div class="custom-file">
-                        <input type="file" name="image" id="image" class="custom-file-input" value="{{ $project->image }}" required>
+                        <input type="file" name="image" id="image" class="custom-file-input" value="{{ $project->image }}">
                         <label class="custom-file-label" for="image">{{ $project->image }}</label>
                     </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12 mt-2">
+                    <label for="tags">Tags</label>
+                    <select name="tags[]" id="tags" class="selectpicker form-control" data-live-search="true" title="Select tags" multiple data-actions-box="true" data-size="5">
+                        @foreach ($tags as $tag)
+                            @if (in_array($tag->id, $project->tags->pluck('id')->toArray()))
+                                <option value="{{ $tag->id }}" selected>{{ $tag->title }}</option>
+                            @else
+                                <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-row">

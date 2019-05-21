@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
+use App\Models\Tag;
 use App\Classes\Utilitat;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\UploadedFile;
@@ -30,13 +31,17 @@ class ProjectController extends Controller {
     }
 
     public function create() {
-        return view('admin.projects.new');
+        $tags = Tag::All();
+        $datos['tags'] = $tags;
+
+        return view('admin.projects.new', $datos);
     }
 
     public function store(Request $request) {
         $project = new Project;
         $project->title =  $request->input('title');
         $project->url =  $request->input('url');
+        $tags =  $request->input('tags');
         $project->image = "";
 
         if ($request->has('visible')) {
@@ -49,6 +54,7 @@ class ProjectController extends Controller {
 
         try {
             $project->save();
+            $project->tags()->attach($tags);
 
             if($fichero) {
                 $imagen_path = 'Project_' . $project->id . "." . $fichero->getClientOriginalExtension();
@@ -75,7 +81,10 @@ class ProjectController extends Controller {
     }
 
     public function edit(Project $project) {
+        $tags = Tag::All();
+        $datos['tags'] = $tags;
         $datos['project'] = $project;
+
         $datos['original_image'] = "media/img/default_image.png";
 
         if ($project->image != "") {
@@ -88,6 +97,7 @@ class ProjectController extends Controller {
     public function update(Request $request, Project $project) {
         $project->title =  $request->input('title');
         $project->url =  $request->input('url');
+        $tags =  $request->input('tags');
         $project->image = "";
 
         if ($request->has('visible')) {
@@ -109,6 +119,8 @@ class ProjectController extends Controller {
                 $project->image =  'storage/projects/' . $imagen_path;
             }
 
+            $project->tags()->detach();
+            $project->tags()->attach($tags);
             $project->save();
 
             $success = "Proyecto editado correctamente.";
@@ -122,9 +134,13 @@ class ProjectController extends Controller {
         return redirect()->action('ProjectController@index')->withInput();
     }
 
-    public function destroy(Project $project) {
+    public function destroy(Request $request, Project $project) {
         try {
+            $project->tags()->detach();
             $project->delete();
+
+            $success = "Proyecto eliminado correctamente.";
+            $request->session()->flash('success', $success);
         } catch (QueryException $e) {
             $error = Utilitat::errorMessage($e);
             $request->session()->flash('error', $error);

@@ -1,5 +1,9 @@
 @extends('templates.main')
 
+@section('title')
+Languages - Index
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="card mt-2">
