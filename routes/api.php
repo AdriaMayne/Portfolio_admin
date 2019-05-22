@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('projects', 'ProjectController@indexApi')->name('projects.index');
-Route::get('languages', 'LanguageController@indexApi')->name('languages.index');
-Route::get('testimonials', 'TestimonialController@indexApi')->name('testimonials.index');
-// Route::apiResource('project', 'ProjectController');
+Route::get('project', 'ProjectController@indexApi')->name('project.index');
+Route::get('language', 'LanguageController@indexApi')->name('language.index');
+Route::get('testimonial', 'TestimonialController@indexApi')->name('testimonial.index');
+Route::post('contact', 'ContactController@storeApi')->name('contact.store');

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+
+use Illuminate\Database\QueryException;
+use App\Clases\Utilitat;
 
 class ContactController extends Controller {
     public function index(Request $request) {
@@ -22,6 +26,28 @@ class ContactController extends Controller {
         $datos['search'] = $search;
 
         return view('admin.contacts.index', $datos);
+    }
+
+    public function storeApi(Request $request) {
+        $contact = new Contact();
+
+        $contact->subject = $request->input('subject');
+        $contact->name = $request->input('name');
+        $contact->email = $request->input('email');
+        $contact->message = $request->input('message');
+        $contact->date = Carbon::now()->timezone('Europe/Madrid');
+
+        try {
+            $contact->save();
+
+            $respuesta = response()
+                            ->setStatusCode(201);
+        } catch (QueryException $e) {
+            $mensaje = Utilitat::errorMessage($e);
+            $respuesta = response()
+                            ->json(['error' => $mensaje], 400);
+        }
+        return $respuesta;
     }
 
     public function show(Contact $contact) {
