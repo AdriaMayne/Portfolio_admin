@@ -11,6 +11,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use App\Http\Resources\ProjectResource;
 
 class ProjectController extends Controller {
     public function index(Request $request) {
@@ -28,6 +29,12 @@ class ProjectController extends Controller {
         $datos['search'] = $search;
 
         return view('admin.projects.index', $datos);
+    }
+
+    public function indexApi() {
+        $projects = Project::All();
+
+        return ProjectResource::collection($projects);
     }
 
     public function create() {

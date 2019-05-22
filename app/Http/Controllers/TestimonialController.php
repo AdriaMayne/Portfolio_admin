@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use App\Http\Resources\TestimonialResource;
 
 class TestimonialController extends Controller {
     public function index(Request $request) {
@@ -28,6 +29,12 @@ class TestimonialController extends Controller {
         $datos['search'] = $search;
 
         return view('admin.testimonials.index', $datos);
+    }
+
+    public function indexApi() {
+        $testimonials = Testimonial::All();
+
+        return TestimonialResource::collection($testimonials);
     }
 
     public function create() {

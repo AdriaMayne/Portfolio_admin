@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
+use App\Http\Resources\LanguageResource;
 
 class LanguageController extends Controller {
     public function index(Request $request) {
@@ -27,6 +28,12 @@ class LanguageController extends Controller {
         $datos['search'] = $search;
 
         return view('admin.languages.index', $datos);
+    }
+
+    public function indexApi() {
+        $languages = Language::All();
+
+        return LanguageResource::collection($languages);
     }
 
     public function create() {
