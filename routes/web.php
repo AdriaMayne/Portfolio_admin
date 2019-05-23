@@ -11,17 +11,27 @@
 |
 */
 
-// ------------ PRUEBAS ------------
+// ------------------------- PRUEBAS -------------------------
+
+// ------------------------- PRUEBAS -------------------------
 
 
-// ------------ PRUEBAS ------------
 
+// ------------------------- PÚBLICO -------------------------
 // LOGIN
 Route::get('login', function () {
     return view('auth.login');
 })->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
+// Vídeo
+Route::get('/video', function () {
+    return view('video');
+});
+
+
+
+// ------------------------- PRIVADO -------------------------
 Route::group(['middleware' => ['auth']], function () {
     // LANDING -- Prueba
     Route::get('/', function () {
