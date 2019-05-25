@@ -32,7 +32,8 @@ class TestimonialController extends Controller {
     }
 
     public function indexApi() {
-        $testimonials = Testimonial::All();
+        $testimonials = Testimonial::orderBy('order')
+                                    ->get();
 
         return TestimonialResource::collection($testimonials);
     }
