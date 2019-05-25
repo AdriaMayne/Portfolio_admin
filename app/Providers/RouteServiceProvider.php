@@ -35,7 +35,19 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
+        $this->mapApiRoutes(
+            Route::group([
+                'middleware' => ['api', 'cors'],
+                'namespace' => $this->namespace,
+                'prefix' => 'api',
+            ], function($router) {
+                // Add your routes here:
+                Route::get('project', 'ProjectController@indexApi')->name('project.index');
+                Route::get('language', 'LanguageController@indexApi')->name('language.index');
+                Route::get('testimonial', 'TestimonialController@indexApi')->name('testimonial.index');
+                Route::post('contact', 'ContactController@storeApi')->name('contact.store');
+            })
+        );
 
         $this->mapWebRoutes();
 
