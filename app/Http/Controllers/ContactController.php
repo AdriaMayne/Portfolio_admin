@@ -41,9 +41,7 @@ class ContactController extends Controller {
         try {
             $contact->save();
 
-            $respuesta = (new ContactResource($contact))
-                            ->response()
-                            ->setStatusCode(201, 'Mensaje enviado correctamente.');
+            $respuesta = response('Mensaje enviado correctamente.', 201);
         } catch (QueryException $e) {
             $mensaje = Utilitat::errorMessage($e);
             $respuesta = response()
