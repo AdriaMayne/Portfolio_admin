@@ -6,6 +6,7 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
+use Illuminate\Http\Response;
 use Illuminate\Database\QueryException;
 use App\Clases\Utilitat;
 
@@ -41,7 +42,7 @@ class ContactController extends Controller {
             $contact->save();
 
             $respuesta = response()
-                            ->setStatusCode(201);
+                            ->setStatusCode(201, 'Mensaje enviado correctamente.');
         } catch (QueryException $e) {
             $mensaje = Utilitat::errorMessage($e);
             $respuesta = response()
