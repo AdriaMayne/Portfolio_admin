@@ -1,4 +1,4 @@
-#thumbnail {
+#thumbnail, #thumbnail_logo, #thumbnail_mockup {
     height: 12vw;
     width: 12vw;
     object-fit: cover;
@@ -23,7 +23,7 @@
 }
 
 @media (max-width: 1024px) {
-    #thumbnail {
+    #thumbnail, #thumbnail_logo, #thumbnail_mockup {
         height: 40vw;
         width: 40vw;
     }

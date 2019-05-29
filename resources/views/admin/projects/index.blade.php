@@ -32,8 +32,9 @@ Projects - Index
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Título</th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">URL</th>
+                            <th scope="col">Logo</th>
+                            <th scope="col">Mockup</th>
+                            <th scope="col">Descripción</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
@@ -43,8 +44,9 @@ Projects - Index
                         <tr>
                             <td>{{ $project->id }}</td>
                             <td>{{ $project->title }}</td>
-                            <td>{{ $project->image }}</td>
-                            <td>{{ $project->url }}</td>
+                            <td>{{ $project->logo }}</td>
+                            <td>{{ $project->mockup }}</td>
+                            <td>{{ $project->description }}</td>
                             <td class="col-button">
                                 <form action="{{ action('ProjectController@edit', [$project->id]) }}" method="get">
                                     <button type="submit" class="btn btn-secondary btn-sm float-right"><i class="fas fa-edit"></i> EDITAR</button>
@@ -58,7 +60,7 @@ Projects - Index
                             <td>No se han encontrado registros en la BD.</td>
                             <td></td><td></td>
                             <td></td><td></td>
-                            <td></td>
+                            <td></td><td></td>
                         @endforelse
                     </tbody>
                 </table>

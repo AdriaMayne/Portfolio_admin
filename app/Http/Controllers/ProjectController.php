@@ -47,9 +47,10 @@ class ProjectController extends Controller {
     public function store(Request $request) {
         $project = new Project;
         $project->title =  $request->input('title');
-        $project->url =  $request->input('url');
+        $project->description =  $request->input('description');
         $tags =  $request->input('tags');
-        $project->image = "";
+        $project->logo = "";
+        $project->mockup = "";
 
         if ($request->has('visible')) {
             $project->visible =  1;
@@ -57,17 +58,22 @@ class ProjectController extends Controller {
             $project->visible =  0;
         }
 
-        $fichero = $request->file('image');
+        $fichero_logo = $request->file('logo');
+        $fichero_mockup = $request->file('mockup');
 
         try {
             $project->save();
             $project->tags()->attach($tags);
 
-            if($fichero) {
-                $imagen_path = 'Project_' . $project->id . "." . $fichero->getClientOriginalExtension();
+            if($fichero_logo && $fichero_mockup) {
+                $imagen_path_logo = 'Project_' . $project->id . "." . $fichero_logo->getClientOriginalExtension();
+                $imagen_path_mockup = 'Project_' . $project->id . "_mockup." . $fichero_mockup->getClientOriginalExtension();
 
-                Storage::disk('public')->putFileAs('projects/', $fichero, $imagen_path);
-                $project->image =  'storage/projects/' . $imagen_path;
+                Storage::disk('public')->putFileAs('projects/', $fichero_logo, $imagen_path_logo);
+                Storage::disk('public')->putFileAs('projects/', $fichero_mockup, $imagen_path_mockup);
+
+                $project->logo =  'storage/projects/' . $imagen_path_logo;
+                $project->mockup =  'storage/projects/' . $imagen_path_mockup;
             }
 
             $project->save();
@@ -92,10 +98,15 @@ class ProjectController extends Controller {
         $datos['tags'] = $tags;
         $datos['project'] = $project;
 
-        $datos['original_image'] = "media/img/default_image.png";
+        $datos['original_logo'] = "media/img/default_image.png";
+        $datos['original_mockup'] = "media/img/default_image.png";
 
-        if ($project->image != "") {
-            $datos['original_image'] = $project->image;
+        if ($project->logo != "") {
+            $datos['original_logo'] = $project->logo;
+        }
+
+        if ($project->mockup != "") {
+            $datos['original_mockup'] = $project->mockup;
         }
 
         return view('admin.projects.update', $datos);
@@ -103,9 +114,8 @@ class ProjectController extends Controller {
 
     public function update(Request $request, Project $project) {
         $project->title =  $request->input('title');
-        $project->url =  $request->input('url');
+        $project->description =  $request->input('description');
         $tags =  $request->input('tags');
-        $project->image = "";
 
         if ($request->has('visible')) {
             $project->visible =  1;
@@ -113,17 +123,27 @@ class ProjectController extends Controller {
             $project->visible =  0;
         }
 
-        $fichero = $request->file('image');
+        $fichero_logo = $request->file('logo');
+        $fichero_mockup = $request->file('mockup');
 
         try {
-            if($fichero) {
-                if( Storage::disk('public')->exists($project->image)){
-                    Storage::disk('public')->delete($project->image);
+            if($fichero_logo && $fichero_mockup) {
+                if( Storage::disk('public')->exists($project->logo)){
+                    Storage::disk('public')->delete($project->logo);
                 }
 
-                $imagen_path = 'Project_' . $project->id . "." . $fichero->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('projects/', $fichero, $imagen_path);
-                $project->image =  'storage/projects/' . $imagen_path;
+                if( Storage::disk('public')->exists($project->mockup)){
+                    Storage::disk('public')->delete($project->mockup);
+                }
+
+                $imagen_path_logo = 'Project_' . $project->id . "." . $fichero_logo->getClientOriginalExtension();
+                $imagen_path_mockup = 'Project_' . $project->id . "_mockup." . $fichero_mockup->getClientOriginalExtension();
+
+                Storage::disk('public')->putFileAs('projects/', $fichero_logo, $imagen_path_logo);
+                Storage::disk('public')->putFileAs('projects/', $fichero_mockup, $imagen_path_mockup);
+
+                $project->logo =  'storage/projects/' . $imagen_path_logo;
+                $project->mockup =  'storage/projects/' . $imagen_path_mockup;
             }
 
             $project->tags()->detach();
@@ -144,6 +164,15 @@ class ProjectController extends Controller {
     public function destroy(Request $request, Project $project) {
         try {
             $project->tags()->detach();
+
+            if( Storage::disk('public')->exists($project->logo)){
+                Storage::disk('public')->delete($project->logo);
+            }
+
+            if( Storage::disk('public')->exists($project->mockup)){
+                Storage::disk('public')->delete($project->mockup);
+            }
+
             $project->delete();
 
             $success = "Proyecto eliminado correctamente.";

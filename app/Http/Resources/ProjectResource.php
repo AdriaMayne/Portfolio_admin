@@ -15,8 +15,9 @@ class ProjectResource extends JsonResource {
         return [
             "id" => $this->id,
             "title" => $this->title,
-            "url" => $this->url,
-            "image" => $this->image,
+            "description" => $this->description,
+            "logo" => $this->logo,
+            "mockup" => $this->mockup,
             "visible" => $this->visible,
             "tags" => TagResource::collection($this->tags)
         ];

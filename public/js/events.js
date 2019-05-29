@@ -22,6 +22,48 @@ function readURL(input) {
     }
 }
 
+$("#logo").change(function (){
+    var fileName = $(this).val();
+    $("#logo-label").html(fileName);
+    readURL_logo(this);
+});
+
+function readURL_logo(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#thumbnail_logo').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        $('#thumbnail_logo').attr('src', defaultImage);
+        $("#logo-label").html(defaultImgLabel);
+    }
+}
+
+$("#mockup").change(function (){
+    var fileName = $(this).val();
+    $("#mockup-label").html(fileName);
+    readURL_mockup(this);
+});
+
+function readURL_mockup(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#thumbnail_mockup').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        $('#thumbnail_mockup').attr('src', defaultImage);
+        $("#mockup-label").html(defaultImgLabel);
+    }
+}
+
 $('input[type="checkbox"]').change(function(){
     this.value = (Number(this.checked));
 });

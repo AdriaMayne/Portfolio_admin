@@ -22,26 +22,42 @@ Projects - Edit
             @method('put')
             @csrf
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="title">Título *</label>
                     <input type="text" name="title" id="title" class="form-control col-12" placeholder="Introduce el título" value="{{ $project->title }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="name">URL</label>
-                    <input type="text" name="url" id="url" class="form-control col-12" placeholder="Introduce la URL" value="{{ $project->url }}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="image">Imagen *</label>
+                    <label for="description">Descripción *</label>
+                    <textarea type="text" name="description" id="description" class="form-control col-12" placeholder="Description" maxlength="480" rows="4" required>{{ $project->description }}</textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="logo">Logo *</label>
                     <div class="row mb-3">
                         <a class="mx-auto" data-toggle="modal" data-target="#modalTestNew">
-                            <img id="thumbnail" class="img-thumbnail mx-auto" src="{{ asset($original_image) }}">
+                            <img id="thumbnail_logo" class="img-thumbnail mx-auto" src="{{ asset($original_logo) }}">
                         </a>
                     </div>
                     <div class="custom-file">
-                        <input type="file" name="image" id="image" class="custom-file-input" value="{{ $project->image }}">
-                        <label class="custom-file-label" for="image">{{ $project->image }}</label>
+                        <input type="file" name="logo" id="logo" class="custom-file-input" value="{{ $project->logo }}">
+                        <label id="logo-label" class="custom-file-label" for="logo">{{ $project->logo }}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="mockup">Mockup *</label>
+                    <div class="row mb-3">
+                        <a class="mx-auto" data-toggle="modal" data-target="#modalTestNew">
+                            <img id="thumbnail_mockup" class="img-thumbnail mx-auto" src="{{ asset($original_mockup) }}">
+                        </a>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" name="mockup" id="mockup" class="custom-file-input" value="{{ $project->mockup }}">
+                        <label id="logo-mockup" class="custom-file-label" for="mockup">{{ $project->mockup }}</label>
                     </div>
                 </div>
             </div>

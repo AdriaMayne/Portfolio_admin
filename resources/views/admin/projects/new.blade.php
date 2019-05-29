@@ -21,26 +21,42 @@ Projects - New
         <form action="{{ action('ProjectController@store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="title">Título *</label>
                     <input type="text" name="title" id="title" class="form-control col-12" placeholder="Introduce el título" value="{{ old('title') }}" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="name">URL</label>
-                    <input type="text" name="url" id="url" class="form-control col-12" placeholder="Introduce la URL" value="{{ old('url') }}">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="image">Imagen *</label>
+                    <label for="description">Descripción *</label>
+                    <textarea type="text" name="description" id="description" class="form-control col-12" placeholder="Description" maxlength="480" rows="4" required>{{ old('description') }}</textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="logo">Logo *</label>
                     <div class="row mb-3">
                         <a class="mx-auto" data-toggle="modal" data-target="#modalTestNew">
-                            <img id="thumbnail" class="img-thumbnail mx-auto" src="{{ asset('media/img/default_image.png') }}">
+                            <img id="thumbnail_logo" class="img-thumbnail mx-auto" src="{{ asset('media/img/default_image.png') }}">
                         </a>
                     </div>
                     <div class="custom-file">
-                        <input type="file" name="image" id="image" class="custom-file-input" value="{{ old('image') }}" required>
-                        <label class="custom-file-label" for="image">Seleccionar Archivo</label>
+                        <input type="file" name="logo" id="logo" class="custom-file-input" value="{{ old('logo') }}" required>
+                        <label id="logo-label" class="custom-file-label" for="logo">Seleccionar Archivo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="mockup">Mockup *</label>
+                    <div class="row mb-3">
+                        <a class="mx-auto" data-toggle="modal" data-target="#modalTestNew">
+                            <img id="thumbnail_mockup" class="img-thumbnail mx-auto" src="{{ asset('media/img/default_image.png') }}">
+                        </a>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" name="mockup" id="mockup" class="custom-file-input" value="{{ old('mockup') }}" required>
+                        <label id="mockup-label" class="custom-file-label" for="mockup">Seleccionar Archivo</label>
                     </div>
                 </div>
             </div>
