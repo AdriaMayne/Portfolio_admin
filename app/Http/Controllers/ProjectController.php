@@ -127,22 +127,23 @@ class ProjectController extends Controller {
         $fichero_mockup = $request->file('mockup');
 
         try {
-            if($fichero_logo && $fichero_mockup) {
+            if($fichero_logo) {
                 if( Storage::disk('public')->exists($project->logo)){
                     Storage::disk('public')->delete($project->logo);
                 }
 
+                $imagen_path_logo = 'Project_' . $project->id . "." . $fichero_logo->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('projects/', $fichero_logo, $imagen_path_logo);
+                $project->logo =  'storage/projects/' . $imagen_path_logo;
+            }
+
+            if($fichero_mockup) {
                 if( Storage::disk('public')->exists($project->mockup)){
                     Storage::disk('public')->delete($project->mockup);
                 }
 
-                $imagen_path_logo = 'Project_' . $project->id . "." . $fichero_logo->getClientOriginalExtension();
                 $imagen_path_mockup = 'Project_' . $project->id . "_mockup." . $fichero_mockup->getClientOriginalExtension();
-
-                Storage::disk('public')->putFileAs('projects/', $fichero_logo, $imagen_path_logo);
                 Storage::disk('public')->putFileAs('projects/', $fichero_mockup, $imagen_path_mockup);
-
-                $project->logo =  'storage/projects/' . $imagen_path_logo;
                 $project->mockup =  'storage/projects/' . $imagen_path_mockup;
             }
 
